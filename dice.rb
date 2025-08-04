@@ -15,22 +15,24 @@ end
 
 # create a route that simulates rolling two 6-sided dice on their behalf 
 get("/dice/2/6") do
-  first_die = rand(1..6)
-  second_die = rand(1..6)
-  sum = first_die + second_die
+  @rolls = []
 
- @outcome = "You rolled a #{first_die} and a #{second_die} for a total of #{sum}."
+  2.times do
+    dice = rand(1..6)
+    @rolls.push(dice)
+  end
 
   erb(:two_six)
 end 
 
 # simulate two 10-sided dice
 get("/dice/2/10") do 
-  first_die = rand(1..10)
-  second_die = rand(1..10)
-  sum = first_die + second_die
+  @rolls = []
 
-  @outcome = "You rolled a #{first_die} and a #{second_die} for a total of #{sum}."
+  2.times do
+    dice = rand(1..10)
+    @rolls.push(dice)
+  end
 
 erb(:two_ten)
 end
@@ -38,9 +40,12 @@ end
 # simulate one 20-sided die
 
 get("/dice/1/20") do
-  @die = rand(1..20)
+  @rolls = []
 
-  @outcome = "You rolled a #{die}."
+  1.times do 
+    dice = rand(1..20)
+    @rolls.push(dice)
+  end
 
 erb(:one_twenty)
 end
@@ -48,25 +53,12 @@ end
 # simulate five 4-sided dice
 
 get("/dice/5/4") do
-  first_die = rand(1..4)
-  second_die = rand(1..4)
-  third_die = rand(1..4)
-  fourth_die = rand(1..4)
-  sum = first_die + second_die + third_die + fourth_die 
-  
-  @outcome = "You rolled a #{first_die}, a #{second_die}, a #{third_die}, and a #{fourth_die} for a total of #{sum}."
+  @rolls = []
 
- erb(:five_four)
-end
-
-get("/dice/100/6") do
-  @rolls = [] # Create a blank array
-
-  100.times do # 100 times...
-    die = rand(1..6) # Generate a random number
-
-    @rolls.push(die) # Add the random number to the array
+  5.times do
+    dice = rand(1..4)
+    @rolls.push(dice)
   end
 
-    erb(:one_hundred_six)
+ erb(:five_four)
 end
